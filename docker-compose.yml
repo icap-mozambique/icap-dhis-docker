@@ -5,12 +5,12 @@ services:
     build:
       context: ./tomcat
     container_name: icap-dhis-tomcat
-    ports:
+    # ports:
       # - "8080:8080"
     networks: 
       - network
     depends_on:   
-      - "database-docker"
+      - "icap-dhis-db"
     volumes: 
       - type: bind
         source: /opt/dhis/data/war
@@ -19,7 +19,7 @@ services:
    
   icap-dhis-db:
     build: ./database
-    ports: 
+    # ports: 
       # - "5432:5432"
     container_name: icap-dhis-db
     networks: 
