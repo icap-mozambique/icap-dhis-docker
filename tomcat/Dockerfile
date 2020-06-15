@@ -6,5 +6,4 @@ ADD dhis.conf /home/dhis/config/dhis.conf
 
 VOLUME /opt/dhis/data
 
-EXPOSE 8080
 EXPOSE 8009
