@@ -1,0 +1,38 @@
+version: '3.2'
+services:
+
+  icap-dhis-tomcat:
+    build:
+      context: ./tomcat
+    container_name: icap-dhis-tomcat
+    ports:
+      # - "8080:8080"
+    networks: 
+      - network
+    depends_on:   
+      - "database-docker"
+    volumes: 
+      - type: bind
+        source: /opt/dhis/data/war
+        target: /usr/local/tomcat/webapps 
+    restart: unless-stopped
+   
+  icap-dhis-db:
+    build: ./database
+    ports: 
+      # - "5432:5432"
+    container_name: icap-dhis-db
+    networks: 
+      - network
+    volumes:
+      - type: volume
+        source: dbdata
+        target: /opt/dhis/data
+    restart: unless-stopped
+
+networks: 
+  network:
+    driver: bridge
+
+volumes:
+  dbdata:
