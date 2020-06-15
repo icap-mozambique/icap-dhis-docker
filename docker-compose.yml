@@ -1,6 +1,26 @@
 version: '3.2'
 services:
 
+  icap-dhis-web:
+    build:
+        context: ./apache
+    container_name: icap-dhis-web
+    ports:
+        - "80:80"
+        - "443:443"
+    networks: 
+        - network
+    volumes:
+        - type: bind
+          source: /opt/dhis/data
+          target: /usr/local/apache2/htdocs
+        - type: bind
+          source: /etc/letsencrypt/live
+          target: /etc/letsencrypt/live
+    depends_on:
+        - "icap-dhis-tomcat"
+    restart: unless-stopped
+
   icap-dhis-tomcat:
     build:
       context: ./tomcat
