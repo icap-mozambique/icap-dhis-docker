@@ -1,4 +1,4 @@
-FROM postgis/postgis:latest
+FROM postgis/postgis:10-3.0
 
 LABEL maintainer="skm2180@cumc.columbia.edu"
 
